@@ -1,11 +1,10 @@
 import React from 'react';
-import { render, waitFor } from '@testing-library/react';
-import { screen } from '@testing-library/dom';
+import { render, waitFor, screen, fireEvent } from '@testing-library/react';
+// import { screen } from '@testing-library/dom';
 import userEvent from '@testing-library/user-event';
 import { fetchShow as mockFetchShow } from './api/fetchShow';
 import App from './App';
 
-import Dropdown from './App';
 
 
 jest.mock("./api/fetchShow");
@@ -68,19 +67,7 @@ const show = {
     }
 }
 
-// test('fetch show season info', async() => {
-//     mockFetchShow.mockResolvedValueOnce(show);
-//     const { getByText, queryAllByText } = render(<App />);
 
-//     getByText(/fetching data.../i);
-    
-//     await waitFor(() => {
-//         userEvent.click(getByText(/select a season/i));
-//         queryAllByText(/season 1/i);
-//         userEvent.click(getByText(/season 1/i))
-//     })
-        
-// })
 
 test('fetch show season info', async() => {
     mockFetchShow.mockResolvedValueOnce(show);
@@ -90,9 +77,9 @@ test('fetch show season info', async() => {
 
     await waitFor(() => {
         // screen.getByTestId('dropdown');
-        userEvent.click(screen.getByText(/Select a season/i));
+        fireEvent.click(screen.getByText(/Select a season/i));
         screen.queryAllByText(/season/i);
-        userEvent.click(screen.getByText(/Season 1/i));
+        fireEvent.click(screen.getByText(/Season 1/i));
     })
 
 
